@@ -1,0 +1,71 @@
+<form class="orders-search-form">
+    <div class="form-group col-sm-10">
+        <input type="text" class="form-control" placeholder="Search" ng-model="search_value">
+    </div>
+    <div class="form-group col-sm-2">
+        <select class="form-control" ng-model="search_key">
+            <option>id</option>
+            <option>Customer</option>
+            <option>Vendor</option>
+            <option>Type</option>
+        </select>
+    </div>
+</form>
+
+<table ng-init="getOrders()" class="table table-striped">
+    <tr>
+        <th ng-click="orderTable('id')">id</th>
+        <th ng-click="orderTable('customer')">Customer</th>
+        <th ng-click="orderTable('vendor')">Vendor</th>
+        <th ng-click="orderTable('type')">Type</th>
+        <th ng-click="orderTable('create_date')">Creation date</th>
+        <th ng-click="orderTable('fulfillment_date')">Fulfillment date</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="order in orders | orderBy:order_target:order_asc">
+        <td>{{ order.id }}</td>
+        <td>{{ order.customer }}</td>
+        <td>{{ order.vendor }}</td>
+        <td>{{ order.type }}</td>
+        <td>{{ order.create_date|date }}</td>
+        <td>{{ order.fulfillment_date|date }}</td>
+        <td>
+            <button ng-click="editOrderAction(order)" ng-show="order.edit" class="btn btn-primary btn-warning" data-toggle="modal" data-target="#edit-order">
+                Edit
+            </button>
+        </td>
+    </tr>
+</table>
+
+<div class="modal fade" id="edit-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+          <h2 class="modal-title text-center">Edit order</h2>
+          <form ng-submit="sendPut(editOrder)" name="order-form">
+              <div class="alert alert-danger" ng-show="formErrors !== null">
+                  {{ formErrors }}
+              </div>
+              <div class="form-group">
+                  <label for="customer">Customer</label>
+                  <input type="text" ng-model="editOrder.customer" class="form-control" id="customer" placeholder="Customer" />
+              </div>
+              <div class="form-group">
+                  <label for="vendor">Vendor</label>
+                  <input type="text" ng-model="editOrder.vendor" class="form-control" id="customer" placeholder="Vendor" />
+              </div>
+              <div class="form-group">
+                <label for="type">Order type</label>
+                <select ng-model="editOrder.type" class="form-control" id="type">
+                  <option ng-repeat="type in orderTypes">{{ type }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-warning pull-right">Edit order</button>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

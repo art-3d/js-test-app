@@ -1,0 +1,42 @@
+<h2 class="text-center">Create order</h2>
+
+<form ng-submit="createOrder(order)" name="order-form">
+    <div class="alert alert-danger" ng-show="formErrors !== null">
+        {{ formErrors }}
+    </div>
+    <div class="form-group">
+        <label for="customer">Customer</label>
+        <input type="text" ng-model="order.customer" class="form-control" id="customer" placeholder="Customer" />
+    </div>
+    <div class="form-group">
+        <label for="vendor">Vendor</label>
+        <input type="text" ng-model="order.vendor" class="form-control" id="customer" placeholder="Vendor" />
+    </div>
+    <div class="form-group">
+      <label for="type">Order type</label>
+      <select ng-model="order.type" class="form-control" id="type">
+        <option ng-repeat="type in orderTypes">{{ type }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+        <label for="create-date">Order creation date</label>
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+            <input type="text" class="form-control" id="create-date" ng-model="order.create_date">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="create-date">Order fulfillment date</label>
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+            <input type="text" class="form-control" id="create-date" ng-model="order.fulfillment_date">
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create order</button>
+    </div>
+</form>

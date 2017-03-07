@@ -1,0 +1,11 @@
+{
+  "name": "spa",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "animate.css": "^3.5.2",
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2"
+  }
+}
